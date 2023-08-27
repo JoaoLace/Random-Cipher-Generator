@@ -4,3 +4,4 @@ Notes:
 -Begginer
 -Using Vs Code 
 -"g++ -o main.exe main.cpp classes.cpp cifraAleatoria.cpp" to compile
+-Dont be mean pls
