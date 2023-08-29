@@ -218,8 +218,13 @@ std::string aleatorio::pularLetra(std::string input,int indice){
     int x = 0;
     int y[20] = {0};
     for (char i : input){
+        if (i == '1' || i =='2' || i == '3' || i == '4' || i == '5'){
+            retorno += i;
+            y[x] = i;}
+        else {
         y[x] = aleatorio::letterToNum(i) + indice;
         retorno += aleatorio::numToLetter(y[x]);
+        }
         x++;
     }
     return retorno;

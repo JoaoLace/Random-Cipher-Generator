@@ -55,7 +55,7 @@ int aleatorio::letterToNum(char letter){
         case 'z':
             return 26;
         default:
-            return -1; 
+            return letter; 
     }
 }
 char aleatorio::numToLetter(int num){
@@ -119,7 +119,7 @@ char aleatorio::numToLetter(int num){
         case 26:
             return 'z';
         default:
-            return '\0'; 
+            return num; 
     }
 }
 std::string aleatorio::lowerCase(std::string str){
@@ -135,6 +135,7 @@ void aleatorio::criar(){
     aleatorio::output = "";
     std::cout << "Insira: \n";
     std::cin >> aleatorio::input;
+
     int teste = rand() % 2;
     int indice = (rand() % 3) + 1;
     if (teste == 0){
@@ -142,15 +143,13 @@ void aleatorio::criar(){
         std::cout << aleatorio::output << "\n";
         }
     if (teste == 1) {
+        aleatorio::codeNum();
+        
         mudarAlfabeto_2();
-    
-    std::cout << "Indice: " << indice << "\n";
 
     aleatorio::output = aleatorio::pularLetra(aleatorio::output, indice);
-
-    std::cout << "Output before codeNum():" << aleatorio::output << "\n";
-    aleatorio::codeNum();
-    std::cout << "Output after codeNum(): " << aleatorio::output <<  "\n";
+    
+    std::cout << "Output after random cipher: " << aleatorio::output <<  "\n";
     }
     std::cout << "Descode key = " << aleatorio::key << "\n";
 
@@ -172,18 +171,18 @@ void aleatorio::mudarAlfabeto_2(){
 }
 void aleatorio::codeNum(){
     int x;
-    for (char i : output){
+    for (char i : aleatorio::input){
        
         if (i == 'a')
-            aleatorio::output[x] = '1';
+            aleatorio::input[x] = '1';
         if (i == 'e')
-            aleatorio::output[x] = '2';
+            aleatorio::input[x] = '2';
         if (i == 'i')
-            aleatorio::output[x] = '3';
+            aleatorio::input[x] = '3';
         if (i == 'o' )
-            aleatorio::output[x] = '4';
+            aleatorio::input[x] = '4';
         if (i == 'u')
-            aleatorio::output[x] = '5';
+            aleatorio::input[x] = '5';
         x++;
     }
 }
@@ -274,7 +273,9 @@ void aleatorio::descodificar (){
     std::cin >> descodeKey;
     char indice = descodeKey[3];
     if (descodeKey[1] == '1'){
+        outputDescodificado = "";
         for (char i : inputCodificado){
+        
             outputDescodificado += aleatorio::alfa2ToLetter(i);
         }
         std::cout << "Descodificado: " << outputDescodificado << "\n";
@@ -285,21 +286,32 @@ void aleatorio::descodificar (){
 
         outputDescodificado ="";
         std::string quaseDescosdificado = "";
-        std::cout << "\n" << aleatorio::inputCodificado << "\n";
+  
         for (char i : inputCodificado){
             quaseDescosdificado += aleatorio::descodificarJump(indice,i);
         }
-        descodeNum(quaseDescosdificado);
-        std::cout << "Quase descodificado: " << buceta << "\n";
-        for (char i : buceta){
+       
+
+        for (char i : quaseDescosdificado){
             outputDescodificado += aleatorio::descodeAlfa1(i); 
         }
-        std::cout << outputDescodificado;
+         descodeNum(outputDescodificado);
+        std::cout << "\nDescodificado: " <<  buceta << "\n";
     }
 }
 char aleatorio::descodeAlfa1(char input){
      switch (input)
     {
+    case '1':
+        return '1';
+    case '2':
+        return '2';
+    case '3':
+        return '3';
+    case '4':
+        return '4';
+    case '5':
+        return '5';
     case 'z':
         return 'a';
     case 'y':
@@ -420,6 +432,16 @@ char aleatorio::alfabeto_1(char input){
 char aleatorio::alfabeto_2(char input){
     switch (input)
     {
+    case '1':
+        return '1';
+    case '2':
+        return '2';
+    case '3':
+        return '3';
+    case '4':
+        return '4';
+    case '5':
+        return '5';
     case 'a':
         return 'z';
     case 'b':
@@ -470,7 +492,9 @@ char aleatorio::alfabeto_2(char input){
         return 'c';
     case 'z':
         return 'b';
+    default:
+        return input;
     
 }
-    return 'X';
+    return input;
 }
