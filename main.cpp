@@ -28,7 +28,10 @@ int main () {
         
     }
     if (escolha == "a"){
-        random.criar();
+        std::string choice = "";
+        std::cout << "Codificar ou Descodificar? \n";
+        std::cin >> choice;
+        choice == "codificar" ? random.criar() : random.descodificar();
         system("pause");
         system("cls");
     }}

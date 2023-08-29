@@ -130,30 +130,229 @@ std::string aleatorio::lowerCase(std::string str){
     return lowecase;
 }
 void aleatorio::criar(){
+    aleatorio::key = "";
     aleatorio::input ="";
     aleatorio::output = "";
     std::cout << "Insira: \n";
     std::cin >> aleatorio::input;
-    int teste;
-    // O alfabeto sera diferente ?
-    teste = rand() % 2;
-    aleatorio::alfabetoTeste = toBool(teste);
-    // Cifra de cesar?
-    teste = rand() % 2;
-    aleatorio::pularLetraTeste = toBool(teste);
-    // Alfabeto numerico?
-    teste = rand() % 2;
-    aleatorio::alfaNumericoTeste = toBool(teste);
-    aleatorio::alfabetoTeste = true;
-    if (aleatorio::alfabetoTeste)
-        for (char x : aleatorio::input){
-        aleatorio::output += aleatorio::alfabeto(x);
+    int teste = rand() % 2;
+    int indice = (rand() % 3) + 1;
+    if (teste == 0){
+        mudarAlfabeto_1();
+        std::cout << aleatorio::output << "\n";
         }
-    // if (aleatorio::pularLetraTeste)
-    //   aleatorio::output = pularLetra(aleatorio::output,3);
+    if (teste == 1) {
+        mudarAlfabeto_2();
+    
+    std::cout << "Indice: " << indice << "\n";
 
-    std::cout << aleatorio::output << "\n";
+    aleatorio::output = aleatorio::pularLetra(aleatorio::output, indice);
 
+    std::cout << "Output before codeNum():" << aleatorio::output << "\n";
+    aleatorio::codeNum();
+    std::cout << "Output after codeNum(): " << aleatorio::output <<  "\n";
+    }
+    std::cout << "Descode key = " << aleatorio::key << "\n";
+
+
+
+}
+void aleatorio::mudarAlfabeto_1(){
+    aleatorio::key += "a1";
+    for (char x : aleatorio::input){
+        aleatorio::output += aleatorio::alfabeto_1(x);
+    }
+}
+void aleatorio::mudarAlfabeto_2(){
+    aleatorio::key += "a2";
+    aleatorio::output = "";
+    for (char x : aleatorio::input){
+        aleatorio::output += aleatorio::alfabeto_2(x);
+    }
+}
+void aleatorio::codeNum(){
+    int x;
+    for (char i : output){
+       
+        if (i == 'a')
+            aleatorio::output[x] = '1';
+        if (i == 'e')
+            aleatorio::output[x] = '2';
+        if (i == 'i')
+            aleatorio::output[x] = '3';
+        if (i == 'o' )
+            aleatorio::output[x] = '4';
+        if (i == 'u')
+            aleatorio::output[x] = '5';
+        x++;
+    }
+}
+void aleatorio::descodeNum(std::string str){
+
+    int x;
+    for (char i : str){
+       
+        if (i == '1')
+            str[x] = 'a';
+        if (i == '2')
+            str[x] = 'e';
+        if (i == '3')
+            str[x] = 'i';
+        if (i == '4' )
+            str[x] = 'o';
+        if (i == '5')
+            str[x] = 'u';
+        x++;
+    }
+    aleatorio::buceta = str;
+
+}
+char aleatorio::alfa2ToLetter(char receber){
+    switch (receber)
+    {
+    case '!':
+        return 'a';
+    case '@':
+        return 'b';
+    case '#':
+        return 'c';
+    case '$':
+        return 'd';
+    case '%':
+        return 'e';
+    case '8':
+        return 'f';
+    case '&':
+        return 'g';
+    case '*':
+        return 'h';
+    case '(':
+        return 'i';
+    case ')':
+        return 'j';
+    case '-':
+        return 'k';
+    case '+':
+        return 'l';
+    case '=':
+        return 'm';
+    case '6':
+        return 'n';
+    case '/':
+        return 'o';
+    case '|':
+        return 'p';
+    case ',':
+        return 'r';
+    case '<':
+        return 's';
+    case '>':
+        return 't';
+    case ':':
+        return 'u';
+    case '~':
+        return 'v';
+    case '^':
+        return 'w';
+    case '[':
+        return 'x';
+    case ']':
+        return 'y';
+    case '.':
+        return 'z';
+    
+}
+    return 'X';
+}
+
+void aleatorio::descodificar (){
+    outputDescodificado,inputCodificado = "";
+    std::string descodeKey;
+    std::cout << "Insira: \n";
+    std::cin >> inputCodificado;
+    std::cout << "Insira a chave: \n";
+    std::cin >> descodeKey;
+    char indice = descodeKey[3];
+    if (descodeKey[1] == '1'){
+        for (char i : inputCodificado){
+            outputDescodificado += aleatorio::alfa2ToLetter(i);
+        }
+        std::cout << "Descodificado: " << outputDescodificado << "\n";
+    }
+
+
+    else {
+
+        outputDescodificado ="";
+        std::string quaseDescosdificado = "";
+        std::cout << "\n" << aleatorio::inputCodificado << "\n";
+        for (char i : inputCodificado){
+            quaseDescosdificado += aleatorio::descodificarJump(indice,i);
+        }
+        descodeNum(quaseDescosdificado);
+        std::cout << "Quase descodificado: " << buceta << "\n";
+        for (char i : buceta){
+            outputDescodificado += aleatorio::descodeAlfa1(i); 
+        }
+        std::cout << outputDescodificado;
+    }
+}
+char aleatorio::descodeAlfa1(char input){
+     switch (input)
+    {
+    case 'z':
+        return 'a';
+    case 'y':
+        return 'b';
+    case 'x':
+        return 'c';
+    case 'w':
+        return 'd';
+    case 'v':
+        return 'e';
+    case 'u':
+        return 'f';
+    case 't':
+        return 'g';
+    case 's':
+        return 'h';
+    case 'r':
+        return 'i';
+    case 'q':
+        return 'j';
+    case 'p':
+        return 'k';
+    case 'o':
+        return 'l';
+    case 'n':
+        return 'm';
+    case 'm':
+        return 'n';
+    case 'l':
+        return 'o';
+    case 'k':
+        return 'p';
+    case 'j':
+        return 'r';
+    case 'i':
+        return 's';
+    case 'h':
+        return 't';
+    case 'g':
+        return 'u';
+    case 'f':
+        return 'v';
+    case 'e':
+        return 'w';
+    case 'd':
+        return 'x';
+    case 'c':
+        return 'y';
+    case 'b':
+        return 'z';
+    
+}
+    return 'X';
 }
 bool aleatorio::toBool(int x){
     if (x == 0)
@@ -161,7 +360,7 @@ bool aleatorio::toBool(int x){
     
     return false;
 }
-char aleatorio::alfabeto(char input){
+char aleatorio::alfabeto_1(char input){
     switch (input)
     {
     case 'a':
@@ -214,6 +413,63 @@ char aleatorio::alfabeto(char input){
         return ']';
     case 'z':
         return '.';
+    
+}
+    return 'X';
+}
+char aleatorio::alfabeto_2(char input){
+    switch (input)
+    {
+    case 'a':
+        return 'z';
+    case 'b':
+        return 'y';
+    case 'c':
+        return 'x';
+    case 'd':
+        return 'w';
+    case 'e':
+        return 'v';
+    case 'f':
+        return 'u';
+    case 'g':
+        return 't';
+    case 'h':
+        return 's';
+    case 'i':
+        return 'r';
+    case 'j':
+        return 'q';
+    case 'k':
+        return 'p';
+    case 'l':
+        return 'o';
+    case 'm':
+        return 'n';
+    case 'n':
+        return 'm';
+    case 'o':
+        return 'l';
+    case 'p':
+        return 'k';
+    case 'r':
+        return 'j';
+    case 's':
+        return 'i';
+    case 't':
+        return 'h';
+    case 'u':
+        return 'g';
+    case 'v':
+        return 'f';
+    case 'w':
+        return 'e';
+    case 'x':
+        return 'd';
+    case 'y':
+        return 'c';
+    case 'z':
+        return 'b';
     
 }
     return 'X';
